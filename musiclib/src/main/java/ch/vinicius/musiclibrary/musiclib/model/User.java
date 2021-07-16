@@ -4,6 +4,7 @@ import java.util.List;
 
 import ch.vinicius.musiclibrary.musiclib.dto.UserInputDto;
 
+// Used for all types of users. Holds libraries and has Roles
 public interface User {
 
 	String getUsername();

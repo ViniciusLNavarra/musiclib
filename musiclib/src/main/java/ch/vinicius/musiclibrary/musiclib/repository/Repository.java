@@ -9,6 +9,7 @@ import ch.vinicius.musiclibrary.musiclib.model.Library;
 import ch.vinicius.musiclibrary.musiclib.model.User;
 import ch.vinicius.musiclibrary.musiclib.model.UserImpl;
 
+// Creates queries for the database
 public interface Repository extends CrudRepository<UserImpl, Long> {
 
 	default User updateUser(User user) {

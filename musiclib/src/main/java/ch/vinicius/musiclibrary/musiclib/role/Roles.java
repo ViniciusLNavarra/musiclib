@@ -16,7 +16,7 @@ public class Roles {
 	@GeneratedValue
 	Long roleId;
 	@Column(name = "role")
-	String role;
+	String rolename;
 	@ManyToMany(mappedBy = "roles")
 	private List<UserImpl> users;
 

@@ -6,6 +6,7 @@ import ch.vinicius.musiclibrary.musiclib.dto.UserInputDto;
 import ch.vinicius.musiclibrary.musiclib.model.Library;
 import ch.vinicius.musiclibrary.musiclib.model.User;
 
+// Is used for all user requests.
 public interface UserService {
 
 	List<User> getAllUsers();
