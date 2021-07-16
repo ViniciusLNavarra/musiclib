@@ -6,4 +6,6 @@ public interface Library {
 	public String getName();
 
 	public List<Music> getMusiclist();
+
+	User getUser();
 }

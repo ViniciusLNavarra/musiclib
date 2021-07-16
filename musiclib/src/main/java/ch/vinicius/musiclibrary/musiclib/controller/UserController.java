@@ -22,6 +22,7 @@ public class UserController {
 
 	@GetMapping("{username}/libraries")
 	List<LibraryDto> getAllLibraries(@PathVariable String username) {
+		System.out.print(username);
 		return service.getLibraries(username).stream().map(library -> new LibraryDto(library))
 				.collect(Collectors.toList());
 	}

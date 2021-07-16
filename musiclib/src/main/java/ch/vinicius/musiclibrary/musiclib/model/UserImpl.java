@@ -2,7 +2,6 @@ package ch.vinicius.musiclibrary.musiclib.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,15 +23,16 @@ public class UserImpl implements User {
 	private String username;
 	@Column(name = "password")
 	private String passwordHash;
-	private List<Library> libraries;
+	@OneToMany(mappedBy = "user")
+	private List<LibraryImpl> libraries;
+	@ManyToMany
 	private List<Roles> roles;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	public List<Library> getLibraries() {
+	@Override
+	public List<LibraryImpl> getLibraries() {
 		return libraries;
 	}
 
-	@ManyToMany
 	@JoinTable(name = "user_role")
 	public List<Roles> getRoles() {
 		return roles;
@@ -72,6 +72,11 @@ public class UserImpl implements User {
 	public void update(UserInputDto userInputDto) {
 		this.setUsername(userInputDto.getUsername());
 		this.setPassword(userInputDto.getPassword());
+	}
+
+	@Override
+	public Long getId() {
+		return userId;
 	}
 
 }

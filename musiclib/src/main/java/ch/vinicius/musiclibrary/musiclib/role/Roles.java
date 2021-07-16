@@ -6,10 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 
-import ch.vinicius.musiclibrary.musiclib.model.User;
+import ch.vinicius.musiclibrary.musiclib.model.UserImpl;
 
 @Entity(name = "role")
 public class Roles {
@@ -18,11 +17,10 @@ public class Roles {
 	Long roleId;
 	@Column(name = "role")
 	String role;
-	private List<User> users;
+	@ManyToMany(mappedBy = "roles")
+	private List<UserImpl> users;
 
-	@ManyToMany
-	@JoinColumn(name = "user", nullable = false)
-	public List<User> getUsers() {
+	public List<UserImpl> getUsers() {
 		return users;
 	}
 }

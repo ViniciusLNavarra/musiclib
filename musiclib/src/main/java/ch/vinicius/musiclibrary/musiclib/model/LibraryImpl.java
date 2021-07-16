@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -19,22 +17,22 @@ public class LibraryImpl implements Library {
 	Long libraryId;
 	@Column(name = "name")
 	String name;
-	private final User user;
+	@ManyToOne
+	private final UserImpl user;
+
+	@ManyToMany
 	List<Music> musiclist;
 
 	@Override
-	@ManyToMany
-	@JoinTable(name = "library_music")
 	public List<Music> getMusiclist() {
 		return musiclist;
 	}
 
-	public LibraryImpl(User user) {
+	public LibraryImpl(UserImpl user) {
 		this.user = user;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "user", nullable = false)
+	@Override
 	public User getUser() {
 		return user;
 	}

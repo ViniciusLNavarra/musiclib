@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -15,18 +14,17 @@ public class Music {
 	@Id
 	@GeneratedValue
 	Long musicId;
-	private List<Library> libraries;
+	@ManyToMany(mappedBy = "musiclist")
+	private List<LibraryImpl> libraries;
+	@ManyToOne
 	private Artist artist;
 	@Column(name = "name")
 	private String musicname;
 
-	@ManyToMany
-	public List<Library> getLibraries() {
+	public List<LibraryImpl> getLibraries() {
 		return libraries;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "artist", nullable = false)
 	public Artist getArtist() {
 		return artist;
 	}

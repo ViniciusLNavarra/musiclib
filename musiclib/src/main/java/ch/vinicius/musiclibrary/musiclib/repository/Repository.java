@@ -21,5 +21,5 @@ public interface Repository extends CrudRepository<UserImpl, Long> {
 		return save(new UserImpl(username, password));
 	}
 
-	List<Library> findLibraryByUsername(String username);
+	List<Library> findLibraryByUserId(Long userId);
 }

@@ -54,7 +54,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<Library> getLibraries(String username) {
-		return repos.findLibraryByUsername(username);
+		return StreamSupport.stream(getUserByUsername(username).getLibraries().spliterator(), false)
+				.collect(Collectors.toList());
 	}
 
 }
