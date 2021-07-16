@@ -1,9 +1,18 @@
 package ch.vinicius.musiclibrary.musiclib.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import ch.vinicius.musiclibrary.musiclib.dto.UserInputDto;
+import ch.vinicius.musiclibrary.musiclib.role.Roles;
 
 @Entity(name = "User")
 public class UserImpl implements User {
@@ -11,9 +20,23 @@ public class UserImpl implements User {
 	@Id
 	@GeneratedValue
 	private Long userId;
-	@Column(unique = true)
+	@Column(name = "username", unique = true)
 	private String username;
+	@Column(name = "password")
 	private String passwordHash;
+	private List<Library> libraries;
+	private List<Roles> roles;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	public List<Library> getLibraries() {
+		return libraries;
+	}
+
+	@ManyToMany
+	@JoinTable(name = "user_role")
+	public List<Roles> getRoles() {
+		return roles;
+	}
 
 	public UserImpl() {
 	}
@@ -43,6 +66,12 @@ public class UserImpl implements User {
 
 	public User getUser() {
 		return this;
+	}
+
+	@Override
+	public void update(UserInputDto userInputDto) {
+		this.setUsername(userInputDto.getUsername());
+		this.setPassword(userInputDto.getPassword());
 	}
 
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import ch.vinicius.musiclibrary.musiclib.dto.UserInputDto;
 import ch.vinicius.musiclibrary.musiclib.exception.InvalidArgumentException;
 import ch.vinicius.musiclibrary.musiclib.exception.UserNotFoundException;
+import ch.vinicius.musiclibrary.musiclib.model.Library;
 import ch.vinicius.musiclibrary.musiclib.model.User;
 import ch.vinicius.musiclibrary.musiclib.repository.Repository;
 
@@ -40,6 +41,7 @@ public class UserServiceImpl implements UserService {
 			throw new InvalidArgumentException();
 		}
 		User user = getUserById(userId);
+		user.update(userInputDto);
 		return repos.updateUser(user);
 	}
 
@@ -48,6 +50,11 @@ public class UserServiceImpl implements UserService {
 		if (userId != null) {
 			repos.deleteById(userId);
 		}
+	}
+
+	@Override
+	public List<Library> getLibraries(String username) {
+		return repos.findLibraryByUsername(username);
 	}
 
 }
