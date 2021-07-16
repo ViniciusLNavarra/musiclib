@@ -3,3 +3,4 @@ bin
 documentation/*.docx
 documentation/*.svg
 documentation/*.vsdx
+documentation/*.~vsdx
